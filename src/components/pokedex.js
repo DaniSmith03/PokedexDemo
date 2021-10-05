@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {capitalizeFirst} from "./Styling";
 import axios from 'axios';
 import pokeLogo from "../images/pokeLogo.png";
+import SearchIcon from "@material-ui/icons/Search";
 import{
     AppBar,
     Toolbar,
@@ -12,10 +13,10 @@ import{
     CardMedia,
     Typography,
     Button,
+    TextField,
 } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import mockData from '../mockData';
-import { CenterFocusStrong } from "@material-ui/icons";
+
 
 const useStyles = makeStyles({
     pokedexContainer:{
@@ -34,9 +35,29 @@ const useStyles = makeStyles({
         
     display: 'block',
     paddingBottom: '20px',
-    
+    },
 
-    }
+    toolBarClass:{
+        display:'flex',
+        justifyContent:'space-evenly',
+
+    },
+    searchBar:{
+        display:'flex',
+        backgroundColor:'#0075BE'
+
+    },
+    searchIcon:{
+        alignSelf:'flex-end',
+        height:'2rem',
+        fontSize:'5rem',
+
+    },
+    searchInput:{
+        width:'15rem',
+        margin:'5px',
+        marginLeft:'-1rem'
+    },
 });
 
 
@@ -45,9 +66,10 @@ const Pokedex=(props)=>{
     const {history}=props;
     const classes=useStyles();
     const [pokemonData, setPokemonData] = useState({});
+    const [filter, setFilter] = useState("");
 
     useEffect(()=>{
-        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=800`)
+        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=898`)
         .then(function (response) {
             const { data } = response;
             const { results } = data;
@@ -64,6 +86,10 @@ const Pokedex=(props)=>{
             setPokemonData(newPokemonData);
           });
       }, []);
+
+      const handleSearchChange = (e) => {
+        setFilter(e.target.value);
+      };
 
 const getPokemonCard=(pokemonId)=>{
     console.log(pokemonData[`${pokemonId}`])
@@ -91,24 +117,39 @@ const getPokemonCard=(pokemonId)=>{
         <React.Fragment>
             <img className={classes.logoContainer} style={{ width: "500px", height: "300px", margin: "auto" }} src={pokeLogo} alt="Logo" /> 
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar className={classes.toolBarClass}>
                     <Button variant="contained" onClick={() => history.push("/Subscribe")}>
-          Subscribe
-        </Button></Toolbar>
+                    Subscribe
+                    </Button>
+                    <div className={classes.searchBar}>
+                        <SearchIcon className={classes.searchIcon}/>
+                        <TextField className={classes.searchInput}
+                        onChange={handleSearchChange}
+                        label="Pokemon Name"
+                        variant="standard"
+                        />
+                        
+
+                    </div>
+        
+                </Toolbar>
                 </AppBar>
                 {pokemonData ? (
                     <Grid container spacing={2} className={classes.pokedexContainer}>
                     {Object.keys(pokemonData).map(pokemonId =>
+                    pokemonData[pokemonId].name.includes(filter)&&
                         getPokemonCard(pokemonId)
                         )};
                     </Grid>
 
                 ) : (
                     <CircularProgress/>
-                )};
+                )}
 
         </React.Fragment>
     )
 };
 
 export default Pokedex;
+
+

@@ -91,7 +91,7 @@ const Pokemon=(props)=>{
               <div className={classes.borderContainer}>
 
               <Typography className={classes.infoContainer} variant="h3">
-                {`${id}.)`} {capitalizeFirst(name)}
+                {`# ${id}.`} {capitalizeFirst(name)}
                 <img src={front_default} />
                 </Typography>
 
