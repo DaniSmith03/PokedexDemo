@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {capitalizeFirst} from "./Styling";
+import axios from 'axios';
+import pokeLogo from "../images/pokeLogo.png";
 import{
     AppBar,
     Toolbar,
@@ -9,9 +11,11 @@ import{
     CircularProgress,
     CardMedia,
     Typography,
+    Button,
 } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import mockData from '../mockData';
+import { CenterFocusStrong } from "@material-ui/icons";
 
 const useStyles = makeStyles({
     pokedexContainer:{
@@ -25,6 +29,13 @@ const useStyles = makeStyles({
     },
     cardContent: {
         textAlign: 'center',
+    },
+    logoContainer:{
+        
+    display: 'block',
+    paddingBottom: '20px',
+    
+
     }
 });
 
@@ -33,12 +44,30 @@ const useStyles = makeStyles({
 const Pokedex=(props)=>{
     const {history}=props;
     const classes=useStyles();
-    const [pokemonData, setPokemonData] = useState(mockData);
+    const [pokemonData, setPokemonData] = useState({});
 
+    useEffect(()=>{
+        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=800`)
+        .then(function (response) {
+            const { data } = response;
+            const { results } = data;
+            const newPokemonData = {};
+            results.forEach((pokemon, index) => {
+              newPokemonData[index + 1] = {
+                id: index + 1,
+                name: pokemon.name,
+                sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  index + 1
+                }.png`,
+              };
+            });
+            setPokemonData(newPokemonData);
+          });
+      }, []);
 
 const getPokemonCard=(pokemonId)=>{
-    console.log(pokemonData[`${pokemonId}`]);
-    const { id, name } = pokemonData[`${pokemonId}`];
+    console.log(pokemonData[`${pokemonId}`])
+    const { id, name } = pokemonData[`${pokemonId}`]
     const sprite=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 
     return(
@@ -54,14 +83,18 @@ const getPokemonCard=(pokemonId)=>{
             </CardContent>
         </Card>
     </Grid>
-    );
-};
+    )
+}
 
 
     return(
         <React.Fragment>
+            <img className={classes.logoContainer} style={{ width: "500px", height: "300px", margin: "auto" }} src={pokeLogo} alt="Logo" /> 
             <AppBar position="static">
-                <Toolbar></Toolbar>
+                <Toolbar>
+                    <Button variant="contained" onClick={() => history.push("/Subscribe")}>
+          Subscribe
+        </Button></Toolbar>
                 </AppBar>
                 {pokemonData ? (
                     <Grid container spacing={2} className={classes.pokedexContainer}>
