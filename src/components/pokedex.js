@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {capitalizeFirst} from "./Styling";
 import{
     AppBar,
     Toolbar,
@@ -27,8 +28,6 @@ const useStyles = makeStyles({
     }
 });
 
-const capitalizeFirst = (name) => 
-name.charAt(0).toUpperCase() + name.slice(1);
 
 
 const Pokedex=(props)=>{
