@@ -32,15 +32,16 @@ DigitalCrafts React Project
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Pokemon Logo](images/pokeLogo.png)](https://pokedex-dsc.herokuapp.com/)
+[![Pokemon Logo](./images/pokeLogo.png)](https://pokedex-dsc.herokuapp.com/)
 
-While this project started as just a program requirement, we wanted to build something with substance. Why? Because we are developers of course! The application outlined in this documentation is a chat application designed to take you back to early 2000's AIM/ Yahoo messenger. While we hope the application is reminiscent of simpler times, We Would like to deliver something more than a simple application.
+This project was built as a requirement for Digital Crafts Programming Bootcamp. However, outside of that requirement, this project was built for fun to build a deeper understanding of React JS while also getting to bridge my seperate interest into one. Thus you have this pokeedex demo. 
 
 Current Features:
 
-* Register - Create a login for access to the app.
-* Login - authentication based login to the application
-* Chat - send messages to other users connected to the session
+* Scroll Pokedex - View all available pokemon registered to the official pokedex. 
+* Pokemon Details - Click to see details about your favorite pokemon. 
+* Dontate - Mock donation button ( No actual donations accepted at this time).
+
  
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
