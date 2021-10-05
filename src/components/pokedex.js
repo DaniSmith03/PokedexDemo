@@ -119,7 +119,7 @@ const getPokemonCard=(pokemonId)=>{
             <AppBar position="static">
                 <Toolbar className={classes.toolBarClass}>
                     <Button variant="contained" onClick={() => history.push("/Subscribe")}>
-                    Subscribe
+                    Donate
                     </Button>
                     <div className={classes.searchBar}>
                         <SearchIcon className={classes.searchIcon}/>
