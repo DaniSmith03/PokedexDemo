@@ -32,7 +32,7 @@ DigitalCrafts React Project
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Pokemon Logo](./images/pokeLogo.png)](https://pokedex-dsc.herokuapp.com/)
+[![Pokemon Logo](src/images/pokeLogo.png)](https://pokedex-dsc.herokuapp.com/)
 
 This project was built as a requirement for Digital Crafts Programming Bootcamp. However, outside of that requirement, this project was built for fun to build a deeper understanding of React JS while also getting to bridge my seperate interest into one. Thus you have this pokeedex demo. 
 
